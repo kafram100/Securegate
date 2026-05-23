@@ -2,17 +2,34 @@
 
 import { useLayoutEffect, useState } from "react"
 
+function applyTheme(theme: string) {
+  const root = document.documentElement
+  if (theme === "dark") {
+    root.classList.add("dark")
+    root.classList.remove("light")
+  } else {
+    root.classList.add("light")
+    root.classList.remove("dark")
+  }
+}
+
 export default function ThemeToggle() {
   const [dark, setDark] = useState(false)
 
   useLayoutEffect(() => {
-    setDark(document.documentElement.classList.contains("dark"))
+    const saved = localStorage.getItem("theme")
+    if (saved === "dark" || saved === "light") {
+      setDark(saved === "dark")
+      applyTheme(saved)
+    } else {
+      setDark(document.documentElement.classList.contains("dark"))
+    }
   }, [])
 
   function toggle() {
     const next = !dark
     setDark(next)
-    document.documentElement.classList.toggle("dark", next)
+    applyTheme(next ? "dark" : "light")
     localStorage.setItem("theme", next ? "dark" : "light")
   }
 

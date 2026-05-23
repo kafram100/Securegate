@@ -20,6 +20,26 @@ export default function RootLayout({
     >
       <head>
         <meta name="color-scheme" content="light dark" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                var theme = localStorage.getItem("theme");
+                var root = document.documentElement;
+                if (theme === "dark") {
+                  root.classList.add("dark");
+                  root.classList.remove("light");
+                } else if (theme === "light") {
+                  root.classList.add("light");
+                  root.classList.remove("dark");
+                } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                  root.classList.add("dark");
+                  root.classList.remove("light");
+                }
+              })();
+            `,
+          }}
+        />
       </head>
       <body className="min-h-full flex flex-col bg-background text-on-background">
         <AuthSessionProvider>{children}</AuthSessionProvider>
