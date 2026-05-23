@@ -1,12 +1,12 @@
-import { auth } from "@/lib/auth"
 import { NextResponse } from "next/server"
 
 export function proxy(request: Request) {
   const url = new URL(request.url)
-  const isLoggedIn = request.headers.get("cookie")?.includes("next-auth.session-token")
+  const cookie = request.headers.get("cookie") || ""
+  const hasSession = /next-auth\.session-token|authjs\.session-token/.test(cookie)
 
-  if (url.pathname.startsWith("/dashboard") && !isLoggedIn) {
-    return NextResponse.redirect(new URL("/login", request.url))
+  if (url.pathname.startsWith("/dashboard") && !hasSession) {
+    return NextResponse.redirect(new URL("/auth?mode=login", request.url))
   }
 
   return NextResponse.next()

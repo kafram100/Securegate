@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import AuthSessionProvider from "@/components/session-provider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -18,23 +19,10 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  var theme = localStorage.getItem('theme');
-                  if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                    document.documentElement.classList.add('dark');
-                  }
-                } catch(e) {}
-              })();
-            `,
-          }}
-        />
+        <meta name="color-scheme" content="light dark" />
       </head>
       <body className="min-h-full flex flex-col bg-background text-on-background">
-        {children}
+        <AuthSessionProvider>{children}</AuthSessionProvider>
       </body>
     </html>
   );

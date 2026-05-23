@@ -2,7 +2,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --color-primary: hsl(206, 97%, 52%);
+  --color-primary: hsl(206, 100%, 33%);
   --color-on-primary: hsl(0, 0%, 100%);
   --color-primary-container: hsl(214, 100%, 82%);
   --color-on-primary-container: hsl(206, 100%, 25%);
@@ -18,6 +18,12 @@
   --color-on-error: hsl(0, 0%, 100%);
   --color-error-container: hsl(0, 100%, 80%);
   --color-on-error-container: hsl(0, 100%, 26%);
+  --color-warning: hsl(0, 68%, 42%);
+  --color-on-warning: hsl(0, 0%, 100%);
+  --color-warning-container: hsl(0, 100%, 80%);
+  --color-on-warning-container: hsl(0, 100%, 18%);
+  --color-success: hsl(142, 71%, 45%);
+  --color-on-success: hsl(0, 0%, 100%);
   --color-background: hsl(0, 9%, 98%);
   --color-on-background: hsl(180, 4%, 11%);
   --color-surface: hsl(0, 9%, 98%);
@@ -32,8 +38,8 @@
 }
 
 .dark {
-  --color-primary: hsl(206, 97%, 52%);
-  --color-on-primary: hsl(207, 100%, 18%);
+  --color-primary: hsl(206, 100%, 33%);
+  --color-on-primary: hsl(0, 0%, 100%);
   --color-primary-container: hsl(206, 100%, 25%);
   --color-on-primary-container: hsl(216, 100%, 91%);
   --color-secondary: hsl(240, 100%, 76%);
@@ -48,6 +54,12 @@
   --color-on-error: hsl(0, 100%, 18%);
   --color-error-container: hsl(0, 100%, 26%);
   --color-on-error-container: hsl(0, 100%, 90%);
+  --color-warning: hsl(0, 100%, 80%);
+  --color-on-warning: hsl(0, 100%, 18%);
+  --color-warning-container: hsl(0, 100%, 35%);
+  --color-on-warning-container: hsl(0, 100%, 90%);
+  --color-success: hsl(142, 77%, 73%);
+  --color-on-success: hsl(142, 100%, 15%);
   --color-background: hsl(0, 0%, 6%);
   --color-on-background: hsl(0, 0%, 85%);
   --color-surface: hsl(0, 0%, 6%);
@@ -59,6 +71,44 @@
   --color-inverse-surface: hsl(0, 0%, 89%);
   --color-inverse-on-surface: hsl(180, 2%, 19%);
   --color-inverse-primary: hsl(206, 100%, 33%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --color-primary: hsl(206, 100%, 33%);
+    --color-on-primary: hsl(0, 0%, 100%);
+    --color-primary-container: hsl(206, 100%, 25%);
+    --color-on-primary-container: hsl(216, 100%, 91%);
+    --color-secondary: hsl(240, 100%, 76%);
+    --color-on-secondary: hsl(249, 100%, 33%);
+    --color-secondary-container: hsl(246, 100%, 21%);
+    --color-on-secondary-container: hsl(246, 100%, 94%);
+    --color-tertiary: hsl(264, 100%, 73%);
+    --color-on-tertiary: hsl(269, 100%, 27%);
+    --color-tertiary-container: hsl(270, 100%, 37%);
+    --color-on-tertiary-container: hsl(267, 100%, 93%);
+    --color-error: hsl(0, 100%, 80%);
+    --color-on-error: hsl(0, 100%, 18%);
+    --color-error-container: hsl(0, 100%, 26%);
+    --color-on-error-container: hsl(0, 100%, 90%);
+    --color-warning: hsl(0, 100%, 80%);
+    --color-on-warning: hsl(0, 100%, 18%);
+    --color-warning-container: hsl(0, 100%, 35%);
+    --color-on-warning-container: hsl(0, 100%, 90%);
+    --color-success: hsl(142, 77%, 73%);
+    --color-on-success: hsl(142, 100%, 15%);
+    --color-background: hsl(0, 0%, 6%);
+    --color-on-background: hsl(0, 0%, 85%);
+    --color-surface: hsl(0, 0%, 6%);
+    --color-on-surface: hsl(0, 0%, 85%);
+    --color-surface-variant: hsl(180, 1%, 27%);
+    --color-on-surface-variant: hsl(240, 1%, 78%);
+    --color-outline: hsl(180, 1%, 67%);
+    --color-outline-variant: hsl(180, 1%, 27%);
+    --color-inverse-surface: hsl(0, 0%, 89%);
+    --color-inverse-on-surface: hsl(180, 2%, 19%);
+    --color-inverse-primary: hsl(206, 100%, 33%);
+  }
 }
 
 @theme {
@@ -89,6 +139,12 @@
   --color-inverse-surface: var(--color-inverse-surface);
   --color-inverse-on-surface: var(--color-inverse-on-surface);
   --color-inverse-primary: var(--color-inverse-primary);
+  --color-warning: var(--color-warning);
+  --color-on-warning: var(--color-on-warning);
+  --color-warning-container: var(--color-warning-container);
+  --color-on-warning-container: var(--color-on-warning-container);
+  --color-success: var(--color-success);
+  --color-on-success: var(--color-on-success);
 }
 
 body {

@@ -8,7 +8,7 @@ export default async function Home() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-8 bg-background">
       <ThemeToggle />
-      <h1 className="mb-4 text-4xl font-bold text-on-background">SecureGate</h1>
+      <h1 className="mb-4 text-4xl font-bold text-primary">SecureGate</h1>
       <p className="mb-8 text-lg text-on-surface-variant">
         A focused authentication and security app
       </p>
@@ -23,14 +23,14 @@ export default async function Home() {
         ) : (
           <>
             <Link
-              href="/login"
+              href="/auth?mode=login"
               className="rounded-lg bg-primary px-6 py-3 text-on-primary transition hover:brightness-110"
             >
               Sign In
             </Link>
             <Link
-              href="/signup"
-              className="rounded-lg border border-outline px-6 py-3 text-primary transition hover:bg-primary-container"
+              href="/auth?mode=signup"
+              className="rounded-lg border border-primary px-6 py-3 text-primary transition hover:bg-primary-container"
             >
               Sign Up
             </Link>

@@ -42,3 +42,6 @@ TOKENS.txt
 
 # prisma
 prisma/migrations/
+
+# user uploads
+public/uploads/*

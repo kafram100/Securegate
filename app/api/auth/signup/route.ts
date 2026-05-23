@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs"
 import { z } from "zod"
 import { prisma } from "@/lib/prisma"
 import { generateToken, addMinutes } from "@/lib/utils"
+import { sendMail } from "@/lib/mail"
 
 const signupSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -32,13 +33,21 @@ export async function POST(request: Request) {
       )
     }
 
+    const token = generateToken()
+    const verificationUrl = `${process.env.NEXTAUTH_URL}/verify-email/${token}`
+
+    await sendMail({
+      to: email,
+      subject: "Verify your email address",
+      html: `<p>Hi ${name},</p><p>Click <a href="${verificationUrl}">here</a> to verify your email. This link expires in 15 minutes.</p>`,
+    })
+
     const hashedPassword = await bcrypt.hash(password, 12)
 
-    const user = await prisma.user.create({
+    await prisma.user.create({
       data: { name, email, password: hashedPassword },
     })
 
-    const token = generateToken()
     await prisma.verificationToken.create({
       data: {
         identifier: email,
@@ -47,25 +56,14 @@ export async function POST(request: Request) {
       },
     })
 
-    const verificationUrl = `${process.env.NEXTAUTH_URL}/verify-email/${token}`
-
-    const { Resend } = await import("resend")
-    const resend = new Resend(process.env.RESEND_API_KEY ?? "")
-
-    await resend.emails.send({
-      from: "SecureGate <noreply@yourdomain.com>",
-      to: email,
-      subject: "Verify your email address",
-      html: `<p>Hi ${name},</p><p>Click <a href="${verificationUrl}">here</a> to verify your email. This link expires in 15 minutes.</p>`,
-    })
-
     return NextResponse.json(
       { message: "Account created. Check your email to verify." },
       { status: 201 },
     )
-  } catch {
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Something went wrong"
     return NextResponse.json(
-      { error: "Something went wrong" },
+      { error: message },
       { status: 500 },
     )
   }
