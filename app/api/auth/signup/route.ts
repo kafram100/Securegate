@@ -33,20 +33,13 @@ export async function POST(request: Request) {
       )
     }
 
-    const token = generateToken()
-    const verificationUrl = `${process.env.NEXTAUTH_URL}/verify-email/${token}`
-
-    await sendMail({
-      to: email,
-      subject: "Verify your email address",
-      html: `<p>Hi ${name},</p><p>Click <a href="${verificationUrl}">here</a> to verify your email. This link expires in 15 minutes.</p>`,
-    })
-
     const hashedPassword = await bcrypt.hash(password, 12)
 
     await prisma.user.create({
       data: { name, email, password: hashedPassword },
     })
+
+    const token = generateToken()
 
     await prisma.verificationToken.create({
       data: {
@@ -55,6 +48,12 @@ export async function POST(request: Request) {
         expires: addMinutes(15),
       },
     })
+
+    sendMail({
+      to: email,
+      subject: "Verify your email address",
+      html: `<p>Hi ${name},</p><p>Click <a href="${process.env.NEXTAUTH_URL}/verify-email/${token}">here</a> to verify your email. This link expires in 15 minutes.</p>`,
+    }).catch(() => {})
 
     return NextResponse.json(
       { message: "Account created. Check your email to verify." },
