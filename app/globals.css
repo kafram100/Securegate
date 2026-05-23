@@ -1,4 +1,95 @@
 @import "tailwindcss";
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --color-primary: hsl(206, 97%, 52%);
+  --color-on-primary: hsl(0, 0%, 100%);
+  --color-primary-container: hsl(214, 100%, 82%);
+  --color-on-primary-container: hsl(206, 100%, 25%);
+  --color-secondary: hsl(243, 96%, 61%);
+  --color-on-secondary: hsl(0, 0%, 100%);
+  --color-secondary-container: hsl(241, 100%, 88%);
+  --color-on-secondary-container: hsl(249, 100%, 33%);
+  --color-tertiary: hsl(267, 79%, 52%);
+  --color-on-tertiary: hsl(0, 0%, 100%);
+  --color-tertiary-container: hsl(264, 100%, 86%);
+  --color-on-tertiary-container: hsl(270, 100%, 37%);
+  --color-error: hsl(0, 68%, 42%);
+  --color-on-error: hsl(0, 0%, 100%);
+  --color-error-container: hsl(0, 100%, 80%);
+  --color-on-error-container: hsl(0, 100%, 26%);
+  --color-background: hsl(0, 9%, 98%);
+  --color-on-background: hsl(180, 4%, 11%);
+  --color-surface: hsl(0, 9%, 98%);
+  --color-on-surface: hsl(180, 4%, 11%);
+  --color-surface-variant: hsl(0, 0%, 89%);
+  --color-on-surface-variant: hsl(180, 1%, 27%);
+  --color-outline: hsl(180, 0%, 46%);
+  --color-outline-variant: hsl(0, 0%, 78%);
+  --color-inverse-surface: hsl(180, 2%, 19%);
+  --color-inverse-on-surface: hsl(60, 3%, 94%);
+  --color-inverse-primary: hsl(214, 100%, 82%);
+}
+
+.dark {
+  --color-primary: hsl(206, 97%, 52%);
+  --color-on-primary: hsl(207, 100%, 18%);
+  --color-primary-container: hsl(206, 100%, 25%);
+  --color-on-primary-container: hsl(216, 100%, 91%);
+  --color-secondary: hsl(240, 100%, 76%);
+  --color-on-secondary: hsl(249, 100%, 33%);
+  --color-secondary-container: hsl(246, 100%, 21%);
+  --color-on-secondary-container: hsl(246, 100%, 94%);
+  --color-tertiary: hsl(264, 100%, 73%);
+  --color-on-tertiary: hsl(269, 100%, 27%);
+  --color-tertiary-container: hsl(270, 100%, 37%);
+  --color-on-tertiary-container: hsl(267, 100%, 93%);
+  --color-error: hsl(0, 100%, 80%);
+  --color-on-error: hsl(0, 100%, 18%);
+  --color-error-container: hsl(0, 100%, 26%);
+  --color-on-error-container: hsl(0, 100%, 90%);
+  --color-background: hsl(0, 0%, 6%);
+  --color-on-background: hsl(0, 0%, 85%);
+  --color-surface: hsl(0, 0%, 6%);
+  --color-on-surface: hsl(0, 0%, 85%);
+  --color-surface-variant: hsl(180, 1%, 27%);
+  --color-on-surface-variant: hsl(240, 1%, 78%);
+  --color-outline: hsl(180, 1%, 67%);
+  --color-outline-variant: hsl(180, 1%, 27%);
+  --color-inverse-surface: hsl(0, 0%, 89%);
+  --color-inverse-on-surface: hsl(180, 2%, 19%);
+  --color-inverse-primary: hsl(206, 100%, 33%);
+}
+
+@theme {
+  --color-primary: var(--color-primary);
+  --color-on-primary: var(--color-on-primary);
+  --color-primary-container: var(--color-primary-container);
+  --color-on-primary-container: var(--color-on-primary-container);
+  --color-secondary: var(--color-secondary);
+  --color-on-secondary: var(--color-on-secondary);
+  --color-secondary-container: var(--color-secondary-container);
+  --color-on-secondary-container: var(--color-on-secondary-container);
+  --color-tertiary: var(--color-tertiary);
+  --color-on-tertiary: var(--color-on-tertiary);
+  --color-tertiary-container: var(--color-tertiary-container);
+  --color-on-tertiary-container: var(--color-on-tertiary-container);
+  --color-error: var(--color-error);
+  --color-on-error: var(--color-on-error);
+  --color-error-container: var(--color-error-container);
+  --color-on-error-container: var(--color-on-error-container);
+  --color-background: var(--color-background);
+  --color-on-background: var(--color-on-background);
+  --color-surface: var(--color-surface);
+  --color-on-surface: var(--color-on-surface);
+  --color-surface-variant: var(--color-surface-variant);
+  --color-on-surface-variant: var(--color-on-surface-variant);
+  --color-outline: var(--color-outline);
+  --color-outline-variant: var(--color-outline-variant);
+  --color-inverse-surface: var(--color-inverse-surface);
+  --color-inverse-on-surface: var(--color-inverse-on-surface);
+  --color-inverse-primary: var(--color-inverse-primary);
+}
 
 body {
   font-family: system-ui, -apple-system, sans-serif;

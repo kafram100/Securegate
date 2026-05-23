@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
+import ThemeToggle from "@/components/theme-toggle"
 
 export default function SignUpPage() {
   const router = useRouter()
@@ -57,12 +58,13 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center p-8">
+    <div className="flex min-h-screen flex-col items-center justify-center p-8 bg-background">
+      <ThemeToggle />
       <div className="w-full max-w-sm">
-        <h1 className="mb-6 text-3xl font-bold">Sign Up</h1>
+        <h1 className="mb-6 text-3xl font-bold text-on-background">Sign Up</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div>
-            <label htmlFor="name" className="mb-1 block text-sm font-medium">
+            <label htmlFor="name" className="mb-1 block text-sm font-medium text-on-surface">
               Name
             </label>
             <input
@@ -70,11 +72,11 @@ export default function SignUpPage() {
               name="name"
               type="text"
               required
-              className="w-full rounded-lg border p-3"
+              className="w-full rounded-lg border border-outline bg-surface p-3 text-on-surface placeholder:text-on-surface-variant"
             />
           </div>
           <div>
-            <label htmlFor="email" className="mb-1 block text-sm font-medium">
+            <label htmlFor="email" className="mb-1 block text-sm font-medium text-on-surface">
               Email
             </label>
             <input
@@ -82,11 +84,11 @@ export default function SignUpPage() {
               name="email"
               type="email"
               required
-              className="w-full rounded-lg border p-3"
+              className="w-full rounded-lg border border-outline bg-surface p-3 text-on-surface placeholder:text-on-surface-variant"
             />
           </div>
           <div>
-            <label htmlFor="password" className="mb-1 block text-sm font-medium">
+            <label htmlFor="password" className="mb-1 block text-sm font-medium text-on-surface">
               Password (min. 8 characters)
             </label>
             <input
@@ -96,35 +98,35 @@ export default function SignUpPage() {
               required
               minLength={8}
               onChange={(e) => checkStrength(e.target.value)}
-              className="w-full rounded-lg border p-3"
+              className="w-full rounded-lg border border-outline bg-surface p-3 text-on-surface placeholder:text-on-surface-variant"
             />
             {passwordStrength && (
               <p
                 className={`mt-1 text-sm ${
                   passwordStrength === "strong"
-                    ? "text-green-600"
+                    ? "text-tertiary"
                     : passwordStrength === "fair"
-                      ? "text-yellow-600"
-                      : "text-red-600"
+                      ? "text-secondary"
+                      : "text-error"
                 }`}
               >
                 Password strength: {passwordStrength}
               </p>
             )}
           </div>
-          {error && <p className="text-sm text-red-600">{error}</p>}
-          {message && <p className="text-sm text-green-600">{message}</p>}
+          {error && <p className="text-sm text-error">{error}</p>}
+          {message && <p className="text-sm text-tertiary">{message}</p>}
           <button
             type="submit"
             disabled={loading}
-            className="rounded-lg bg-black py-3 text-white transition hover:bg-gray-800 disabled:opacity-50"
+            className="rounded-lg bg-primary py-3 text-on-primary transition hover:brightness-110 disabled:opacity-50"
           >
             {loading ? "Creating account..." : "Create Account"}
           </button>
         </form>
-        <p className="mt-4 text-sm text-gray-600">
+        <p className="mt-4 text-sm text-on-surface-variant">
           Already have an account?{" "}
-          <Link href="/login" className="hover:underline">
+          <Link href="/login" className="hover:underline text-primary">
             Sign in
           </Link>
         </p>
