@@ -2,6 +2,13 @@
 
 import { useEffect, useState } from "react"
 
+const gradients = [
+  "from-slate-900 via-purple-900 to-slate-900",
+  "from-gray-900 via-blue-900 to-gray-900",
+  "from-zinc-900 via-emerald-900 to-zinc-900",
+  "from-stone-900 via-amber-900 to-stone-900",
+]
+
 const images = [
   "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1600&q=80",
   "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1600&q=80",
@@ -11,6 +18,7 @@ const images = [
 
 export default function HeroCarousel() {
   const [current, setCurrent] = useState(0)
+  const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -25,16 +33,20 @@ export default function HeroCarousel() {
         <div
           key={src}
           className="absolute inset-0 transition-opacity duration-700"
-          style={{ opacity: i === current ? 1 : 0 }}
+          style={{ opacity: loaded && i === current ? 1 : 0 }}
         >
           <img
             src={src}
             alt=""
             className="h-full w-full object-cover"
+            onLoad={() => setLoaded(true)}
           />
-          <div className="absolute inset-0 bg-black/60" />
         </div>
       ))}
+      <div
+        className={`absolute inset-0 bg-gradient-to-br ${gradients[current]} transition-all duration-700`}
+        style={{ opacity: loaded ? 0.7 : 1 }}
+      />
     </div>
   )
 }
